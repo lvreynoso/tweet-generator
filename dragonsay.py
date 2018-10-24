@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # wow much dragon many say
+# ASCII art from https://asciiart.website/index.php?art=creatures/dragons
+# Accessed October 23, 2018
 
 import sys
 
