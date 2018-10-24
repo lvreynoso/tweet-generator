@@ -1,3 +1,4 @@
+# #!/usr/bin/env python3
 # rearrange words
 
 import random
