@@ -4,6 +4,7 @@
 
 import random
 import sys
+import linecache
 
 def random_words(num_words):
     words = ''
@@ -13,20 +14,12 @@ def random_words(num_words):
     for i in range(num_words):
         lucky_numbers.append(random.randint(0, 235886))
 
-    dictionary = open('/usr/share/dict/words', 'r')
+    # dictionary = open('/usr/share/dict/words', 'r')
     line_num = 0
 
     # read through the dictionary
-    lucky_numbers.sort()
     for number in lucky_numbers:
-        found = False
-        while found != True:
-            if number == line_num:
-                words += dictionary.readline()
-                found = True
-            else:
-                dictionary.readline()
-            line_num += 1
+        words += linecache.getline('/usr/share/dict/words', number)
         
 
     return words
