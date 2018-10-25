@@ -17,11 +17,17 @@ def random_words(num_words):
     line_num = 0
 
     # read through the dictionary
-    for line in dictionary:
-        for number in lucky_numbers:
+    lucky_numbers.sort()
+    for number in lucky_numbers:
+        found = False
+        while found != True:
             if number == line_num:
-                words += line
-        line_num += 1
+                words += dictionary.readline()
+                found = True
+            else:
+                dictionary.readline()
+            line_num += 1
+        
 
     return words
 
@@ -30,3 +36,7 @@ if __name__ == '__main__':
     output = random_words(num_words=num_words)
     output = output.replace('\n', ' ')
     print(output)
+
+    import timeit
+    setup = 'from __main__ import random_words'
+    print(timeit.timeit('random_words(num_words=10)', setup=setup, number=100))
