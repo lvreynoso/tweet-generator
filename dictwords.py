@@ -14,9 +14,6 @@ def random_words(num_words):
     for i in range(num_words):
         lucky_numbers.append(random.randint(0, 235886))
 
-    # dictionary = open('/usr/share/dict/words', 'r')
-    line_num = 0
-
     # read through the dictionary
     for number in lucky_numbers:
         words += linecache.getline('/usr/share/dict/words', number)
