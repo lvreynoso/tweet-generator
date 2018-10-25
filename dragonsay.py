@@ -4,14 +4,12 @@
 # Accessed October 23, 2018
 
 import sys
-import string
 
 def format_forty(input_quote):
-
+    # take out all the newline chars in the quote
     split_quote = input_quote.splitlines()
     format_quote = ''
 
-    # take out all the newline chars in the quote
     for index in range(0, len(split_quote)):
         format_quote += split_quote[index]
         if index != len(split_quote) - 1:
