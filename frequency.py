@@ -57,7 +57,7 @@ def histogram_lists(source_text):
         samesies = True
         index = len(text) - 1
         word = text[index]
-        while samesies and index > 0:
+        while samesies and index >= 0:
             if word == text[index]:
                 count += 1
                 index -= 1
@@ -77,7 +77,7 @@ def histogram_tuple(source_text):
         samesies = True
         index = len(text) - 1
         word = text[index]
-        while samesies and index > 0:
+        while samesies and index >= 0:
             if word == text[index]:
                 count += 1
                 index -= 1
@@ -98,7 +98,7 @@ def histogram_counts(source_text):
         samesies = True
         index = len(text) - 1
         word = text[index]
-        while samesies and index > 0:
+        while samesies and index >= 0:
             if word == text[index]:
                 count += 1
                 index -= 1
