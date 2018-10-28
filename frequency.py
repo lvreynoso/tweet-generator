@@ -87,6 +87,34 @@ def histogram_tuple(source_text):
         del text[-(count):]
     return histogram_tuples
 
+def histogram_counts(source_text):
+    # implemented using a dictionary where the values are lists
+    histogram_counts = {}
+    text = source_text.split()
+    # same algorithm as above
+    text.sort()
+    while len(text) > 0:
+        count = 0
+        samesies = True
+        index = len(text) - 1
+        word = text[index]
+        while samesies and index > 0:
+            if word == text[index]:
+                count += 1
+                index -= 1
+            else:
+                samesies = False
+        # this time we check if the *count* is in the dictionary,
+        # and if so we append our word to the count; if not we create
+        # the dictionary key and a new value, which is a list containing
+        # our word
+        if count in histogram_counts:
+            histogram_counts[count].append(word)
+        else:
+            histogram_counts[count] = [word]
+        del text[-(count):]
+    return histogram_counts
+
 
 if __name__ == '__main__':
     # open our file and transfer it to memory
@@ -96,6 +124,7 @@ if __name__ == '__main__':
     translate_table = str.maketrans(dict.fromkeys(string.punctuation))
     source = source.translate(translate_table)
     # make the histogram
+    # print(histogram_counts(source_text = source))
     source_histogram = histogram_lists(source_text = source)
     source_unique_words = unique_words(histogram = source_histogram)
     mystery_frequency = frequency(word = 'mystery', histogram = source_histogram)
