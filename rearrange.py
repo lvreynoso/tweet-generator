@@ -22,8 +22,3 @@ def rearrange_words(sampler):
 if __name__ == '__main__':
     args = sys.argv[1:]
     print(rearrange_words(args))
-
-
-
-
-
