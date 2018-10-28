@@ -4,6 +4,7 @@
 # i love dictionaries
 
 import string
+import json
 
 def histogram(source_text):
     # initialize our empty dictionary
@@ -115,11 +116,14 @@ def histogram_counts(source_text):
         del text[-(count):]
     return histogram_counts
 
+def save_histogram(histogram, output_file):
+    json.dump(histogram, output_file)
+
 
 if __name__ == '__main__':
     # open our file and transfer it to memory
-    file = open('crime_and_punishment.txt', 'r')
-    source = file.read()
+    with open('crime_and_punishment.txt', 'r') as file:
+        source = file.read()
     # strip all punctuation from the file
     translate_table = str.maketrans(dict.fromkeys(string.punctuation))
     source = source.translate(translate_table)
@@ -133,4 +137,6 @@ if __name__ == '__main__':
     # result
     # print('{} unique words.'.format(source_unique_words))
     print('{} unique words. The word \'mystery\' appears {} times, the word \'Sonia\' \n{} times, and the word \'murder\' {} times.'.format(source_unique_words, mystery_frequency, sonia_frequency, murder_frequency))
-
+    with open('histogram.txt', 'w') as histogram_file:
+        save_histogram(histogram = source_histogram, output_file = histogram_file)
+    print('Histogram saved as histogram.txt.')
