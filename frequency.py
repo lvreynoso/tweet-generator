@@ -9,13 +9,17 @@ import json
 def histogram(source_text):
     # initialize our empty dictionary
     histogram_dictionary = {}
+    # strip all punctuation from the file
+    translate_table = str.maketrans(dict.fromkeys(string.punctuation))
+    source = source_text.translate(translate_table)
     # split the source text into words (splits on whitespace)
     # then iterate through each word
-    for word in source_text.split():
-        if word in histogram_dictionary:
-            histogram_dictionary[word] += 1
+    for word in source.split():
+        unique_word = word.lower()
+        if unique_word in histogram_dictionary:
+            histogram_dictionary[unique_word] += 1
         else:
-            histogram_dictionary[word] = 1
+            histogram_dictionary[unique_word] = 1
 
     return histogram_dictionary
 
@@ -24,16 +28,17 @@ def unique_words(histogram):
     return number_of_uniques
 
 def frequency(word, histogram):
+    unique_word = word.lower()
     word_frequency = 0
     if type(histogram) == dict:
-        word_frequency = histogram[word]
+        word_frequency = histogram[unique_word]
     elif type(histogram) == list:
         # if we have a list, iterate through the list until we find our word
         # then check the value
         not_found = True
         index = 0
         while not_found and index < len(histogram):
-            if histogram[index][0] == word:
+            if histogram[index][0] == unique_word:
                 word_frequency = histogram[index][1]
                 not_found = False
             else:
@@ -43,7 +48,10 @@ def frequency(word, histogram):
 def histogram_lists(source_text):
     histogram_list = []
     # split the source into words (splits on whitespace)
-    text = source_text.split()
+    # strip all punctuation from the file
+    translate_table = str.maketrans(dict.fromkeys(string.punctuation))
+    source = source_text.translate(translate_table)
+    text = source.lower().split()
     # sort the list of words, then count the number of unique words.
     # we start by looking at the word at the end of the list,
     # and then check if the penultimate word is the same, and the 
@@ -70,7 +78,10 @@ def histogram_lists(source_text):
 
 def histogram_tuple(source_text):
     histogram_tuples = []
-    text = source_text.split()
+    # strip all punctuation from the file
+    translate_table = str.maketrans(dict.fromkeys(string.punctuation))
+    source = source_text.translate(translate_table)
+    text = source.lower().split()
     # same algorithm as above
     text.sort()
     while len(text) > 0:
@@ -91,7 +102,10 @@ def histogram_tuple(source_text):
 def histogram_counts(source_text):
     # implemented using a dictionary where the values are lists
     histogram_counts = {}
-    text = source_text.split()
+    # strip all punctuation from the file
+    translate_table = str.maketrans(dict.fromkeys(string.punctuation))
+    source = source_text.translate(translate_table)
+    text = source.lower().split()
     # same algorithm as above
     text.sort()
     while len(text) > 0:
@@ -124,18 +138,13 @@ if __name__ == '__main__':
     # open our file and transfer it to memory
     with open('crime_and_punishment.txt', 'r') as file:
         source = file.read()
-    # strip all punctuation from the file
-    translate_table = str.maketrans(dict.fromkeys(string.punctuation))
-    source = source.translate(translate_table)
     # make the histogram
-    # print(histogram_counts(source_text = source))
-    source_histogram = histogram_lists(source_text = source)
+    source_histogram = histogram(source_text = source)
     source_unique_words = unique_words(histogram = source_histogram)
     mystery_frequency = frequency(word = 'mystery', histogram = source_histogram)
     sonia_frequency = frequency(word = 'Sonia', histogram = source_histogram)
     murder_frequency = frequency(word = 'murder', histogram = source_histogram)
     # result
-    # print('{} unique words.'.format(source_unique_words))
     print('{} unique words. The word \'mystery\' appears {} times, the word \'Sonia\' \n{} times, and the word \'murder\' {} times.'.format(source_unique_words, mystery_frequency, sonia_frequency, murder_frequency))
     with open('histogram.txt', 'w') as histogram_file:
         save_histogram(histogram = source_histogram, output_file = histogram_file)
