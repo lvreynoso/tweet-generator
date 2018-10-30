@@ -6,14 +6,19 @@
 import string
 import json
 
+def alphanumericize(source_text):
+    source = source_text.lower()
+    source = source.replace('-', ' ')
+    # this is backwards - I should instead filter all but alphanumerics. todo
+    translate_table = str.maketrans(dict.fromkeys(string.punctuation + '\u201c\u201d\u2018\u2019'))
+    text = source.translate(translate_table)
+    return text
+
 def histogram(source_text):
     # initialize our empty dictionary
     histogram_dictionary = {}
     # strip all punctuation from the file
-    source = source_text
-    source = source.replace('-', ' ')
-    translate_table = str.maketrans(dict.fromkeys(string.punctuation))
-    source = source.translate(translate_table)
+    source = alphanumericize(source_text)
     # split the source text into words (splits on whitespace)
     # then iterate through each word
     for word in source.split():
@@ -51,11 +56,7 @@ def histogram_lists(source_text):
     histogram_list = []
     # split the source into words (splits on whitespace)
     # strip all punctuation from the file
-    source = source_text
-    # need to figure out a comprehensive translation table
-    source = source.lower().replace('-', ' ').replace('\u201c', '').replace('\u201d', '').replace('\u2018', '').replace('\u2019', '')
-    translate_table = str.maketrans(dict.fromkeys(string.punctuation))
-    source = source.translate(translate_table)
+    source = alphanumericize(source_text)
     text = source.split()
     # sort the list of words, then count the number of unique words.
     # we start by looking at the word at the end of the list,
@@ -84,11 +85,8 @@ def histogram_lists(source_text):
 def histogram_tuple(source_text):
     histogram_tuples = []
     # strip all punctuation from the file
-    source = source_text
-    source = source.replace('-', ' ')
-    translate_table = str.maketrans(dict.fromkeys(string.punctuation))
-    source = source.translate(translate_table)
-    text = source.lower().split()
+    source = alphanumericize(source_text)
+    text = source.split()
     # same algorithm as above
     text.sort()
     while len(text) > 0:
@@ -110,11 +108,8 @@ def histogram_counts(source_text):
     # implemented using a dictionary where the values are lists
     histogram_counts = {}
     # strip all punctuation from the file
-    source = source_text
-    source = source.replace('-', ' ')
-    translate_table = str.maketrans(dict.fromkeys(string.punctuation))
-    source = source.translate(translate_table)
-    text = source.lower().split()
+    source = alphanumericize(source_text)
+    text = source.split()
     # same algorithm as above
     text.sort()
     while len(text) > 0:
