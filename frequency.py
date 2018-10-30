@@ -10,8 +10,10 @@ def histogram(source_text):
     # initialize our empty dictionary
     histogram_dictionary = {}
     # strip all punctuation from the file
+    source = source_text
+    source = source.replace('-', ' ')
     translate_table = str.maketrans(dict.fromkeys(string.punctuation))
-    source = source_text.translate(translate_table)
+    source = source.translate(translate_table)
     # split the source text into words (splits on whitespace)
     # then iterate through each word
     for word in source.split():
@@ -49,8 +51,10 @@ def histogram_lists(source_text):
     histogram_list = []
     # split the source into words (splits on whitespace)
     # strip all punctuation from the file
+    source = source_text
+    source = source.replace('-', ' ')
     translate_table = str.maketrans(dict.fromkeys(string.punctuation))
-    source = source_text.translate(translate_table)
+    source = source.translate(translate_table)
     text = source.lower().split()
     # sort the list of words, then count the number of unique words.
     # we start by looking at the word at the end of the list,
@@ -79,8 +83,10 @@ def histogram_lists(source_text):
 def histogram_tuple(source_text):
     histogram_tuples = []
     # strip all punctuation from the file
+    source = source_text
+    source = source.replace('-', ' ')
     translate_table = str.maketrans(dict.fromkeys(string.punctuation))
-    source = source_text.translate(translate_table)
+    source = source.translate(translate_table)
     text = source.lower().split()
     # same algorithm as above
     text.sort()
@@ -103,8 +109,10 @@ def histogram_counts(source_text):
     # implemented using a dictionary where the values are lists
     histogram_counts = {}
     # strip all punctuation from the file
+    source = source_text
+    source = source.replace('-', ' ')
     translate_table = str.maketrans(dict.fromkeys(string.punctuation))
-    source = source_text.translate(translate_table)
+    source = source.translate(translate_table)
     text = source.lower().split()
     # same algorithm as above
     text.sort()
@@ -139,7 +147,7 @@ if __name__ == '__main__':
     with open('crime_and_punishment.txt', 'r') as file:
         source = file.read()
     # make the histogram
-    source_histogram = histogram(source_text = source)
+    source_histogram = histogram_lists(source_text = source)
     source_unique_words = unique_words(histogram = source_histogram)
     mystery_frequency = frequency(word = 'mystery', histogram = source_histogram)
     sonia_frequency = frequency(word = 'Sonia', histogram = source_histogram)
