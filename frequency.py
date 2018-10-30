@@ -52,7 +52,8 @@ def histogram_lists(source_text):
     # split the source into words (splits on whitespace)
     # strip all punctuation from the file
     source = source_text
-    source = source.replace('-', ' ')
+    # need to figure out a comprehensive translation table
+    source = source.replace('-', ' ').replace('\u201c', '').replace('\u201d', '')
     translate_table = str.maketrans(dict.fromkeys(string.punctuation))
     source = source.translate(translate_table)
     text = source.lower().split()
