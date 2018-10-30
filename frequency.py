@@ -53,10 +53,10 @@ def histogram_lists(source_text):
     # strip all punctuation from the file
     source = source_text
     # need to figure out a comprehensive translation table
-    source = source.replace('-', ' ').replace('\u201c', '').replace('\u201d', '')
+    source = source.lower().replace('-', ' ').replace('\u201c', '').replace('\u201d', '').replace('\u2018', '').replace('\u2019', '')
     translate_table = str.maketrans(dict.fromkeys(string.punctuation))
     source = source.translate(translate_table)
-    text = source.lower().split()
+    text = source.split()
     # sort the list of words, then count the number of unique words.
     # we start by looking at the word at the end of the list,
     # and then check if the penultimate word is the same, and the 
