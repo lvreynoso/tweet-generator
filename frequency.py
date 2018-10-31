@@ -8,7 +8,7 @@ import json
 
 def alphanumericize(source_text):
     source = source_text.lower()
-    source = source.replace('-', ' ')
+    source = source.replace('-', ' ') # because Dostoevsky loves his dashes
     # I think this is backwards - I should instead filter all but alphanumerics. But Crime & Punishment has
     # an expanded character set due to its use of phrases in other languages, and digraphs.
     translate_table = str.maketrans(dict.fromkeys(string.punctuation + '\u201c\u201d\u2018\u2019'))
@@ -23,11 +23,10 @@ def histogram(source_text):
     # split the source text into words (splits on whitespace)
     # then iterate through each word
     for word in source.split():
-        unique_word = word.lower()
-        if unique_word in histogram_dictionary:
-            histogram_dictionary[unique_word] += 1
+        if word in histogram_dictionary:
+            histogram_dictionary[word] += 1
         else:
-            histogram_dictionary[unique_word] = 1
+            histogram_dictionary[word] = 1
 
     return histogram_dictionary
 
@@ -46,8 +45,7 @@ def frequency(word, histogram):
         not_found = True
         index = 0
         while not_found and index < len(histogram):
-            # print('{}: {}'.format(histogram[index][0], histogram[index][1]))
-            if histogram[index][0] == unique_word:
+            if unique_word in histogram[index]:
                 word_frequency = histogram[index][1]
                 not_found = False
             else:
@@ -106,8 +104,8 @@ def histogram_tuples(source_text):
             word = text[index]
             count = 1
             index += 1
-        if index == len(text): # for our last item
-            histogram_tuple.append((word, count))
+            if index == len(text): # if our last item is solo
+                histogram_tuple.append((word, count))
     return histogram_tuple
 
 def histogram_counts(source_text):
