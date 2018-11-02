@@ -34,7 +34,7 @@ def weighted_random_word(histogram):
         sum_of_weights += entry[1]
     random_weight = random.randrange(sum_of_weights)
     index = 0
-    while random_weight > 0:
+    while random_weight >= 0:
         random_word = histogram[index][0]
         random_weight -= histogram[index][1]
         index += 1
@@ -45,12 +45,15 @@ def test_randomness(histogram):
     for i in range(10000):
         test_words += ' ' + weighted_random_word(histogram = histogram)
     test_histogram = frequency.histogram_counts(test_words)
-    for j in range(25):
-        index = len(test_histogram) - 1 - j
+    num_top_words = 25
+    index = len(test_histogram) - 1
+    while num_top_words > 0 and index >= 0:
         # our 'inverse' histogram has entries like so: (650, [apple, orange]) etc.
         printline = test_histogram[index][1][0] + ' = '
         printline += str(test_histogram[index][0])
         print(printline)
+        index -= 1
+        num_top_words -= 1
 
 
 if __name__ == '__main__':
