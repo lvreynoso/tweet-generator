@@ -49,11 +49,14 @@ def test_randomness(histogram):
     index = len(test_histogram) - 1
     while num_top_words > 0 and index >= 0:
         # our 'inverse' histogram has entries like so: (650, [apple, orange]) etc.
-        printline = test_histogram[index][1][0] + ' = '
-        printline += str(test_histogram[index][0])
-        print(printline)
+        for entry in test_histogram[index][1]:
+            if num_top_words > 0:
+                printline = entry + ' = '
+                printline += str(test_histogram[index][0])
+                print(printline)
+                num_top_words -= 1
         index -= 1
-        num_top_words -= 1
+        
 
 
 if __name__ == '__main__':
