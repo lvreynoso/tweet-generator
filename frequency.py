@@ -104,8 +104,7 @@ def histogram_tuples(source_text):
             word = text[index]
             count = 1
             index += 1
-        if index == len(text): # for our last item
-            histogram_tuple.append((word, count))
+    histogram_tuple.append((word, count)) # for our last item
     return histogram_tuple
 
 def histogram_counts(source_text):
