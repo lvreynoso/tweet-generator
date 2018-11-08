@@ -15,7 +15,7 @@ source_path = 'crime_and_punishment.txt'
 with open(source_path, 'r') as file:
     source = file.read()
 clean_source = cleanup.alphanumericize(source)
-tokens = tokenize.list(clean_source)
+tokens = tokenize.generate(clean_source)
 histogram = word_count.generate(tokens)
 
 @app.route('/')
