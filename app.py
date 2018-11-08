@@ -3,7 +3,7 @@
 # main script, uses other modules to generate sentences
 
 import cleanup
-import tokenize
+import tokenate
 import word_count
 import sample
 
@@ -11,12 +11,13 @@ from flask import Flask
 app = Flask(__name__)
 
 # setup
+source = ''
 source_path = 'crime_and_punishment.txt'
 with open(source_path, 'r') as file:
     source = file.read()
-clean_source = cleanup.alphanumericize(source)
-tokens = tokenize.generate(clean_source)
-histogram = word_count.generate(tokens)
+clean_source = cleanup.alphanumericize(source_text=source)
+tokens = tokenate.generate(source_text=clean_source)
+histogram = word_count.generate(token_list=tokens)
 
 @app.route('/')
 def index():
