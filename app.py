@@ -24,3 +24,7 @@ def index():
     for i in range(10):
         sentence += ' ' + sample.word(histogram)
     return sentence
+
+if __name__ == '__main__':
+    print('(X) ERROR\nThis program has performed an illegal operation and will be shut down.')
+    print('Do not move. Your IP has been traced and the Internet Police are on their way.')
