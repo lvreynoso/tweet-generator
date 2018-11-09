@@ -5,19 +5,15 @@
 import random
 
 def word(histogram):
-    words = histogram.keys()
-    weights = histogram.values()
     random_word = ''
-    sum_of_weights = 0
-
-    for weight in weights:
-        sum_of_weights += weight
+    sum_of_weights = sum(histogram.values())
     random_weight = random.randrange(sum_of_weights)
 
-    index = 0
-    while random_weight >= 0:
-        random_word = words[index]
-        random_weight -= weights[index]
-        index += 1
+    for key, value in histogram.items():
+        if random_weight - value < 0:
+            random_word = key
+            break
+        else:
+            random_weight -= value
     
     return random_word
