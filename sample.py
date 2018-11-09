@@ -40,7 +40,6 @@ def markov_walk(path, distance):
             sentence += ' ' + current_word
         else:
             set_of_possibities = path[current_word]
-            next_word = word(set_of_possibities)
-            sentence += ' ' + next_word
-            current_word = next_word
+            current_word = word(set_of_possibities)
+            sentence += ' ' + current_word
     return sentence
