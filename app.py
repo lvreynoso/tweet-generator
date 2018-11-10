@@ -8,6 +8,7 @@ import word_count
 import sample
 
 from flask import Flask 
+from flask import request
 app = Flask(__name__)
 
 # setup
@@ -21,10 +22,13 @@ source_map = sample.markov_path(token_list=tokens)
 
 @app.route('/')
 def index():
-    sentence = sample.markov_walk(path=source_map, distance=10)
+    number_of_words = 10 if request.args.get('num') is None else int(request.args.get('num'))
+    sentence = sample.markov_walk(path=source_map, distance=number_of_words)
     return sentence
 
 if __name__ == '__main__':
     # print('(X) ERROR\nThis program has performed an illegal operation and will be shut down.')
     # print('Do not move. Your IP has been traced and the Internet Police are on their way.')
-    print(source_map)
+    print(source_map['\u03a9'])
+    sentence = sample.markov_walk(path=source_map, distance=50)
+    print(sentence)

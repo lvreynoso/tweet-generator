@@ -6,7 +6,10 @@ import string
 
 def alphanumericize(source_text):
     source = source_text.lower()
-    source = source.replace('-', ' ') # because Dostoevsky loves his dashes
+    # because Dostoevsky loves his dashes
+    source = source.replace('-', ' ') 
+    # for STOP and START tokens, we use Greek Alpha & Omega
+    source = '\u0391 ' + source.replace('.', ' \u03a9 \u0391 ')
     
     # I think this is backwards - I should instead filter all but alphanumerics. But Crime & Punishment has
     # an expanded character set due to its use of phrases in other languages, and digraphs.
