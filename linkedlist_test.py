@@ -191,6 +191,36 @@ class LinkedListTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             ll.delete('X')  # Item not found in list
 
+    def test_replace(self):
+        ll = LinkedList(['A', 'B', 'C'])
+        assert ll.head.data == 'A'
+        assert ll.tail.data == 'C'
+        ll.replace('A', 'X')
+        assert ll.head.data == 'X'
+        assert ll.tail.data == 'C'
+        ll.replace('C', 'Z')
+        assert ll.head.data == 'X'
+        assert ll.tail.data == 'Z'
+        ll.replace('B', 'Y')
+        assert ll.find(lambda item: item == 'Y') == 'Y'
+        assert ll.find(lambda item: item == 'A') is None
+        assert ll.find(lambda item: item == 'B') is None
+        assert ll.find(lambda item: item == 'C') is None
+
+    def test_replace_with_item_not_in_list(self):
+        ll = LinkedList(['A', 'B', 'C'])
+        # Replace should raise error if target not found
+        with self.assertRaises(ValueError):
+            ll.replace('P', 'Q') # target not in list
+
+    def test_iteration(self):
+        ll = LinkedList(['A', 'B', 'C'])
+        count = 0
+        for node in ll:
+            count += 1
+        assert count == ll.length()
+
+
 
 if __name__ == '__main__':
     unittest.main()
