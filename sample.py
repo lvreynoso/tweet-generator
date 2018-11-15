@@ -5,9 +5,6 @@
 import dictogram
 import random
 
-START_TOKEN = '\u0391' # Greek 'Alpha'
-STOP_TOKEN = '\u03a9' # Greek 'Omega'
-
 def word(histogram):
     random_word = ''
     sum_of_weights = sum(histogram.values())
@@ -24,7 +21,7 @@ def word(histogram):
 
 def markov_path(token_list):
     markov_map = {}
-    previous_word = START_TOKEN
+    previous_word = token_list[0]
     for token in token_list:
         if token not in markov_map:
             markov_map[token] = dictogram.Dictogram()
@@ -32,8 +29,10 @@ def markov_path(token_list):
         previous_word = token
     return markov_map
 
-def markov_walk(path, distance):
+def markov_walk(path, distance, start_stop_tokens):
     sentence = ''
+    START_TOKEN = start_stop_tokens[0]
+    STOP_TOKEN = start_stop_tokens[1]
     current_word = START_TOKEN
     for step in range(distance):
         if current_word == START_TOKEN:
