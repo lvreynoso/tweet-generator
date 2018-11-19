@@ -20,6 +20,21 @@ class HashTable(object):
         """Return a string representation of this hash table."""
         return 'HashTable({!r})'.format(self.items())
 
+    def __getitem__(self, key):
+        # get an item with subscripting syntax
+        return self.get(key)
+
+    def __setitem__(self, key, value):
+        self.set(key, value)
+
+    def __iter__(self):
+        return self.generator()
+
+    def generator(self):
+        for bucket in self.buckets:
+            for entry in bucket:
+                yield entry
+
     def _bucket_index(self, key):
         """Return the bucket index where the given key would be stored."""
         # Calculate the given key's hash code and transform into bucket index

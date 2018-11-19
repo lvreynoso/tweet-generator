@@ -103,6 +103,26 @@ class HashTableTest(unittest.TestCase):
         with self.assertRaises(KeyError):
             ht.delete('A')  # Key does not exist
 
+    def test_subscripting(self):
+        ht = HashTable()
+        ht['I'] = 1
+        ht['V'] = 5
+        ht['X'] = 9
+        assert ht.length() == 3
+        ht['X'] = 10
+        assert ht['X'] == 10
+
+    def test_iterable(self):
+        ht = HashTable()
+        ht['I'] = 1
+        ht['V'] = 5
+        ht['X'] = 10
+        count = 0
+        for item in ht:
+            count += 1
+        assert count == ht.length()
+
+
 
 if __name__ == '__main__':
     unittest.main()
