@@ -144,17 +144,17 @@ class LinkedList(object):
         if not found:
             raise ValueError('Item not found: {}'.format(item))
 
-    def replace(self, target, replacement):
+    def replace(self, comparator, replacement):
         # Walk through list until we find the target, then replace the data
         found = False
         node = self.head
         while not found and node is not None:
-            if node.data == target:
+            if comparator(node.data) is True:
                 node.data = replacement
                 found = True
             node = node.next
         if not found:
-            raise ValueError('Replacement target not found: {}'.format(target))
+            raise ValueError('Replacement target not found.')
 
 
 
