@@ -31,6 +31,6 @@ def index():
 if __name__ == '__main__':
     # print('(X) ERROR\nThis program has performed an illegal operation and will be shut down.')
     # print('Do not move. Your IP has been traced and the Internet Police are on their way.')
-    print(source_map['\u03a9'])
-    sentence = sample.markov_walk(path=source_map, distance=50)
+    # print(source_map['\u03a9'])
+    sentence = sample.markov_walk(path=source_map, distance=50, start_stop_tokens=start_stop_tokens)
     print(sentence)

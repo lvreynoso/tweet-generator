@@ -35,6 +35,9 @@ class LinkedList(object):
         """Return a string representation of this linked list."""
         return 'LinkedList({!r})'.format(self.items())
 
+    def __contains__(self, item):
+        return True if self.find(lambda entry: entry == item) is not None else False
+
     def __iter__(self):
         return self.generator()
 

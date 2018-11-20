@@ -122,6 +122,16 @@ class HashTableTest(unittest.TestCase):
             count += 1
         assert count == ht.length()
 
+    def test_contains(self):
+        ht = HashTable()
+        ht['I'] = 1
+        ht['V'] = 5
+        ht['X'] = 10
+        found = False
+        if 'X' in ht:
+            found = True
+        assert found == True
+
 
 
 if __name__ == '__main__':
