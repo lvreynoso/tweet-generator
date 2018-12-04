@@ -38,6 +38,9 @@ class LinkedList(object):
     def __contains__(self, item):
         return True if self.find(lambda entry: entry == item) is not None else False
 
+    def __len__(self):
+        return self.list_length
+
     def __iter__(self):
         return self.generator()
 
@@ -69,12 +72,12 @@ class LinkedList(object):
 
     def length(self):
         """Return the length of this linked list by traversing its nodes.
-        TODO: Running time: O(???) Why and under what conditions?"""
+        Running time: O(1) - length is stored as a variable that can be accessed in constant time"""
         return self.list_length
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
-        TODO: Running time: O(???) Why and under what conditions?"""
+        Running time: O(1) no matter how long the list, takes constant time"""
         # Create new node to hold given item
         node = Node(item)
         # Append node after tail, if it exists
@@ -89,7 +92,7 @@ class LinkedList(object):
 
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
-        TODO: Running time: O(???) Why and under what conditions?"""
+        Running time: O(1) Thanks to the head 'pointer' this is constant time"""
         # Create new node to hold given item
         node = Node(item)
         # Prepend node before head, if it exists
@@ -103,8 +106,8 @@ class LinkedList(object):
 
     def find(self, quality):
         """Return an item from this linked list satisfying the given quality.
-        TODO: Best case running time: O(???) Why and under what conditions?
-        TODO: Worst case running time: O(???) Why and under what conditions?"""
+        Best case running time: O(1) If node is at the beginning of the list
+        Worst case running time: O(n) If node as at the end of the list"""
         # Loop through all nodes to find item where quality(item) is True
         # Check if node's data satisfies given quality function
         match = None
@@ -120,8 +123,8 @@ class LinkedList(object):
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
-        TODO: Best case running time: O(???) Why and under what conditions?
-        TODO: Worst case running time: O(???) Why and under what conditions?"""
+        Best case running time: O(1) if node is at the beginning of the list
+        Worst case running time: O(n) if node is at the end of the list or doesn't exist"""
         # Loop through all nodes to find one whose data matches given item
         # Update previous node to skip around node with matching data
         # Otherwise raise error to tell user that delete has failed
@@ -148,6 +151,7 @@ class LinkedList(object):
             raise ValueError('Item not found: {}'.format(item))
 
     def replace(self, comparator, replacement):
+        # O(n) time complexity
         # Walk through list until we find the target, then replace the data
         found = False
         node = self.head
