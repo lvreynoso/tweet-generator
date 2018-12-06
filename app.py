@@ -20,7 +20,7 @@ with open(source_path, 'r') as file:
 start_stop_tokens=('\u0391', '\u03a9') 
 clean_source = cleanup.alphanumericize(source_text=source, start_stop_tokens=start_stop_tokens)
 tokens = tokenate.generate(source_text=clean_source)
-order = 2
+order = 4
 source_map = sample.markov_path(token_list=tokens, order=order)
 
 @app.route('/')
