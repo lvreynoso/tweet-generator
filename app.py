@@ -13,18 +13,19 @@ app = Flask(__name__)
 
 # setup
 source = ''
-source_path = 'crime_and_punishment.txt'
+source_path = 'collected.txt'
 with open(source_path, 'r') as file:
     source = file.read()
 # for STOP and START tokens, we use Greek Alpha & Omega
 start_stop_tokens=('\u0391', '\u03a9') 
 clean_source = cleanup.alphanumericize(source_text=source, start_stop_tokens=start_stop_tokens)
 tokens = tokenate.generate(source_text=clean_source)
-source_map = sample.markov_path(token_list=tokens)
+order = 2
+source_map = sample.markov_path(token_list=tokens, order=order)
 
 @app.route('/')
 def index():
-    number_of_words = 10 if request.args.get('num') is None else int(request.args.get('num'))
+    number_of_words = 50 if request.args.get('num') is None else int(request.args.get('num'))
     sentence = sample.markov_walk(path=source_map, distance=number_of_words, start_stop_tokens=start_stop_tokens)
     return sentence
 

@@ -19,9 +19,12 @@ def word(histogram):
     
     return random_word
 
-def markov_path(token_list):
+def markov_path(token_list, order):
     markov_map = {}
-    previous_word = token_list[0]
+    previous = []
+    for n in range(order):
+        previous.append(token_list[n])
+    previous = tuple(previous)
     for token in token_list:
         if token not in markov_map:
             markov_map[token] = dictogram.Dictogram()
