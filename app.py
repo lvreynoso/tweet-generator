@@ -11,17 +11,22 @@ from flask import Flask
 from flask import request
 app = Flask(__name__)
 
+
+def setup():
+    source = ''
+    source_path = 'collected.txt'
+    with open(source_path, 'r') as file:
+        source = file.read()
+    clean_source = cleanup.alphanumericize(source_text=source, start_stop_tokens=start_stop_tokens)
+    # tokens = tokenate.generate(source_text=clean_source)
+    mark_map = sample.markov_path(token_list=tokenate.generate(source_text=clean_source), order=order)
+    return mark_map
+
 # setup
-source = ''
-source_path = 'collected.txt'
-with open(source_path, 'r') as file:
-    source = file.read()
 # for STOP and START tokens, we use Greek Alpha & Omega
 start_stop_tokens=('\u0391', '\u03a9') 
-clean_source = cleanup.alphanumericize(source_text=source, start_stop_tokens=start_stop_tokens)
-tokens = tokenate.generate(source_text=clean_source)
 order = 4
-source_map = sample.markov_path(token_list=tokens, order=order)
+source_map = setup()
 
 @app.route('/')
 def index():

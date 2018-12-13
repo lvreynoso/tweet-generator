@@ -41,7 +41,6 @@ def markov_path(token_list, order):
     return markov_map
 
 def markov_walk(path, distance, start_stop_tokens, order):
-    # tbd
     sentence = ''
     START_TOKEN = start_stop_tokens[0]
     STOP_TOKEN = start_stop_tokens[1]
