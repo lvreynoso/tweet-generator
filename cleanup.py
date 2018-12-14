@@ -9,7 +9,7 @@ def alphanumericize(source_text, start_stop_tokens):
     STOP_TOKEN = start_stop_tokens[1]
     source = source_text.lower()
     # because Dostoevsky loves his dashes
-    source = source.replace('-', ' ') 
+    source = source.replace('-', ' ')
     source = START_TOKEN + ' ' + source.replace('.', ' ' + STOP_TOKEN + ' ' + START_TOKEN + ' ')
     
     # I think this is backwards - I should instead filter all but alphanumerics. But Crime & Punishment has
